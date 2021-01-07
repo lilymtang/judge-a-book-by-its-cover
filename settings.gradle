@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "Judge A Book By Its Cover"

@@ -1,50 +1,26 @@
 package com.example.judgeabookbyitscover
-
-import android.graphics.Rect
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.util.Log
+
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+
+// API imports
+import com.example.judgeabookbyitscover.network.Volume
+import com.example.judgeabookbyitscover.network.GoogleBookApi
+import com.example.judgeabookbyitscover.network.VolumeApi
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 
 class MainActivity() : AppCompatActivity() {
     lateinit var recyclerView: RecyclerView
     lateinit var coverGalleryAdapter: CoverGalleryAdapter
     lateinit var manager: StaggeredGridLayoutManager
-
-
-    class MarginItemDecoration(
-        private val spaceSize: Int,
-        private val spanCount: Int = 1,
-        private val orientation: Int = StaggeredGridLayoutManager.VERTICAL
-    ) : RecyclerView.ItemDecoration() {
-        override fun getItemOffsets(
-            outRect: Rect, view: View,
-            parent: RecyclerView, state: RecyclerView.State
-        ) {
-            with(outRect) {
-                if (orientation == StaggeredGridLayoutManager.VERTICAL) {
-                    if (parent.getChildAdapterPosition(view) < spanCount) {
-                        top = spaceSize
-                    }
-                    if (parent.getChildAdapterPosition(view) % spanCount == 0) {
-                        left = spaceSize
-                    }
-                } else {
-                    if (parent.getChildAdapterPosition(view) < spanCount) {
-                        left = spaceSize
-                    }
-                    if (parent.getChildAdapterPosition(view) % spanCount == 0) {
-                        top = spaceSize
-                    }
-                }
-
-                right = spaceSize
-                bottom = spaceSize
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,5 +51,28 @@ class MainActivity() : AppCompatActivity() {
 
         coverGalleryAdapter = CoverGalleryAdapter(this, data)
         recyclerView.adapter = coverGalleryAdapter
+
+        val service = VolumeApi.volumeApiService
+
+        /* Calls the endpoint set on getUsers (/api) from UserService using enqueue method
+         * that creates a new worker thread to make the HTTP call */
+        service.getVolume( "DapMtgEACAAJ").enqueue(object : Callback<Volume> {
+
+            /* The HTTP call failed. This method is run on the main thread */
+            override fun onFailure(call: Call<Volume>, t: Throwable) {
+                Log.d("TAG_", "An error happened!")
+                Log.d("TAG_", call.request().url().toString())
+                t.printStackTrace()
+            }
+
+            /* The HTTP call was successful, we should still check status code and response body
+             * on a production app. This method is run on the main thread */
+            override fun onResponse(call: Call<Volume>, response: Response<Volume>) {
+                /* This will print the response of the network call to the Logcat */
+                Log.d("TAG_", response.body()?.volumeInfo?.imageLinks?.thumbnail.toString())
+                Log.d("TAG_", call.request().url().toString())
+            }
+        })
     }
 }
+

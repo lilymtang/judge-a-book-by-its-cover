@@ -5,17 +5,15 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.bumptech.glide.Glide
+import com.example.judgeabookbyitscover.network.Book
+import com.example.judgeabookbyitscover.network.BooksApi
+import com.example.judgeabookbyitscover.network.ListsOverview
 
 // API imports
-import com.example.judgeabookbyitscover.network.Volume
-import com.example.judgeabookbyitscover.network.GoogleBookApi
-import com.example.judgeabookbyitscover.network.VolumeApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
-
 
 class MainActivity() : AppCompatActivity() {
     lateinit var recyclerView: RecyclerView
@@ -32,47 +30,58 @@ class MainActivity() : AppCompatActivity() {
         )
         manager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recyclerView.layoutManager = manager
-
-        // list of images
-        var data = arrayOf<Int> (
-            R.drawable.educated,
-            R.drawable.less,
-            R.drawable.pachinko,
-            R.drawable.into_thin_air,
-            R.drawable.coddling,
-            R.drawable.martian,
-            R.drawable.midnight,
-            R.drawable.bookthief,
-            R.drawable.crazyrichasians,
-            R.drawable.darkmatter,
-            R.drawable.light,
-            R.drawable.promisedland
-        )
-
-        coverGalleryAdapter = CoverGalleryAdapter(this, data)
+        coverGalleryAdapter = CoverGalleryAdapter(Glide.with(this))
         recyclerView.adapter = coverGalleryAdapter
 
-        val service = VolumeApi.volumeApiService
+        val service = BooksApi.BooksApiService
+//        lateinit var books : List<Book>
 
         /* Calls the endpoint set on getUsers (/api) from UserService using enqueue method
          * that creates a new worker thread to make the HTTP call */
-        service.getVolume( "DapMtgEACAAJ").enqueue(object : Callback<Volume> {
+        service.getListsOverview().enqueue(object : Callback<ListsOverview> {
 
             /* The HTTP call failed. This method is run on the main thread */
-            override fun onFailure(call: Call<Volume>, t: Throwable) {
-                Log.d("TAG_", "An error happened!")
-                Log.d("TAG_", call.request().url().toString())
+            override fun onFailure(call: Call<ListsOverview>, t: Throwable) {
+                Log.d("RESPONSE_", "An error happened!")
+                Log.d("RESPONSE_", call.request().url().toString())
                 t.printStackTrace()
             }
 
             /* The HTTP call was successful, we should still check status code and response body
              * on a production app. This method is run on the main thread */
-            override fun onResponse(call: Call<Volume>, response: Response<Volume>) {
+            override fun onResponse(call: Call<ListsOverview>, response: Response<ListsOverview>) {
                 /* This will print the response of the network call to the Logcat */
-                Log.d("TAG_", response.body()?.volumeInfo?.imageLinks?.thumbnail.toString())
-                Log.d("TAG_", call.request().url().toString())
+                Log.d("RESPONSE_", call.request().url().toString())
+
+                var lists = response.body()?.results?.lists
+                if (lists != null) {
+//                    books = lists.flatMap { it.books }
+                    var bookImgs: List<String> = lists.flatMap { it.books }.map { it.book_image }.distinct()
+
+                    Log.d("RESPONSE_", bookImgs.toString())
+                    Log.d("RESPONSE_", bookImgs.size.toString())
+
+                    coverGalleryAdapter.setData(bookImgs)
+                }
             }
         })
+
+        // list of images
+//        var data = arrayOf<Int> (
+//            R.drawable.educated,
+//            R.drawable.less,
+//            R.drawable.pachinko,
+//            R.drawable.into_thin_air,
+//            R.drawable.coddling,
+//            R.drawable.martian,
+//            R.drawable.midnight,
+//            R.drawable.bookthief,
+//            R.drawable.crazyrichasians,
+//            R.drawable.darkmatter,
+//            R.drawable.light,
+//            R.drawable.promisedland
+//        )
+
     }
 }
 

@@ -6,11 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.RequestManager
+import com.example.judgeabookbyitscover.network.Book
 
 /**
  * Adapter creates a view holder and fills it with data for RecyclerView to display
  */
-class CoverGalleryAdapter(var mContext: Context, private val data: Array<Int>) : RecyclerView.Adapter<CoverGalleryAdapter.ViewHolder>() {
+class CoverGalleryAdapter(var glide: RequestManager) : RecyclerView.Adapter<CoverGalleryAdapter.ViewHolder>() {
+    private var data = emptyList<String>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int ): CoverGalleryAdapter.ViewHolder {
         return ViewHolder.from(parent)
     }
@@ -23,7 +27,9 @@ class CoverGalleryAdapter(var mContext: Context, private val data: Array<Int>) :
      * Called by RecyclerView to display the data for the item at the specified list position
      */
     override fun onBindViewHolder(holder: CoverGalleryAdapter.ViewHolder, position: Int) {
-        holder.img.setImageResource(data[position])
+        glide.load(data[position])
+            .override(128, 200)
+            .into(holder.img)
     }
 
     /**
@@ -44,6 +50,11 @@ class CoverGalleryAdapter(var mContext: Context, private val data: Array<Int>) :
                 return ViewHolder(view)
             }
         }
+    }
+
+    fun setData(newList: List<String>) {
+        data = newList
+        notifyDataSetChanged()
     }
 
 }

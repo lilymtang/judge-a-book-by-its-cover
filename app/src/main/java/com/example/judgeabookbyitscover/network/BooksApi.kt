@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 private const val BASE_URL = "https://api.nytimes.com"
-private const val API_KEY =
+private const val API_KEY = BuildConfig.NYT_API_KEY
 
 /**
  * Use the Retrofit builder to build a retrofit object using Moshi as a JSON converter with the base URL set here.

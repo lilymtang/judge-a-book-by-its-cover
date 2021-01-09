@@ -42,7 +42,8 @@ class MainActivity() : AppCompatActivity() {
 
             /* The HTTP call failed. This method is run on the main thread */
             override fun onFailure(call: Call<ListsOverview>, t: Throwable) {
-                Log.d("RESPONSE_", "An error happened!")
+                val message: String = t.message ?: "Error happened"
+                Log.d("RESPONSE_", message)
                 Log.d("RESPONSE_", call.request().url().toString())
                 t.printStackTrace()
             }

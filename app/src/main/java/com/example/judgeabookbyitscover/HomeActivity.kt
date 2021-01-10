@@ -1,5 +1,7 @@
 package com.example.judgeabookbyitscover
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +13,7 @@ import com.example.judgeabookbyitscover.presenter.HomePresenter
 
 // API imports
 
-class HomeActivity() : AppCompatActivity(), HomeContract.View {
+class HomeActivity() : AppCompatActivity(), HomeContract.View, HomeAdapter.OnBookListener {
     lateinit var homePresenter: HomePresenter
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: HomeAdapter
@@ -26,7 +28,7 @@ class HomeActivity() : AppCompatActivity(), HomeContract.View {
         recyclerView.addItemDecoration(MarginItemDecoration(8))
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
-        adapter = HomeAdapter(Glide.with(this))
+        adapter = HomeAdapter(Glide.with(this), this)
         recyclerView.adapter = adapter
 
         // Create repository
@@ -51,6 +53,12 @@ class HomeActivity() : AppCompatActivity(), HomeContract.View {
 
     override fun onGetDataError(msg: String) {
         TODO("Not yet implemented")
+    }
+
+    override fun onBookClick(position: Int) {
+        Log.d("CLICKED", "clicked $position")
+//        var intent: Intent = Intent()
+//        startActivity(intent)
     }
 }
 

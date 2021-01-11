@@ -1,14 +1,14 @@
 package com.example.judgeabookbyitscover.presenter
 
-import com.example.judgeabookbyitscover.model.Repository
+import com.example.judgeabookbyitscover.model.db.BookRepository
 
 abstract class BasePresenter<V: BaseContract.View> : BaseContract.Presenter<V> {
     protected var view: V? = null
-    protected var repository: Repository? = null
+    protected var bookRepository: BookRepository? = null
 
-    override fun create(view: V, repository: Repository) {
+    override fun create(view: V, bookRepository: BookRepository) {
         this.view = view
-        this.repository = repository
+        this.bookRepository = bookRepository
     }
 
     override fun destroy() {

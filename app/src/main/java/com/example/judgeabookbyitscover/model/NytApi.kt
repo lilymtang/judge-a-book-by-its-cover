@@ -1,6 +1,6 @@
 package com.example.judgeabookbyitscover.model
 
-import com.example.judgeabookbyitscover.model.datamodels.ListsOverview
+import com.example.judgeabookbyitscover.model.datamodels.NytResponse
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -11,5 +11,5 @@ import retrofit2.http.GET
  * */
 interface NytApi {
     @GET("/svc/books/v3/lists/overview.json")
-    fun getListsOverview(): Call<ListsOverview>
+    fun getListsOverview(): Call<NytResponse>
 }

@@ -3,16 +3,13 @@ package com.example.judgeabookbyitscover
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.add
-import androidx.fragment.app.commit
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
-import com.example.judgeabookbyitscover.model.Repository
+import com.example.judgeabookbyitscover.model.db.BookRepository
 import com.example.judgeabookbyitscover.model.datamodels.Book
 import com.example.judgeabookbyitscover.presenter.HomeContract
 import com.example.judgeabookbyitscover.presenter.HomePresenter
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 // API imports
 
@@ -20,7 +17,7 @@ class HomeActivity() : AppCompatActivity(R.layout.detail), HomeContract.View, Ho
     lateinit var homePresenter: HomePresenter
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: HomeAdapter
-    lateinit var repository: Repository
+    lateinit var bookRepository: BookRepository
     lateinit var books: List<Book>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,28 +41,33 @@ class HomeActivity() : AppCompatActivity(R.layout.detail), HomeContract.View, Ho
         recyclerView.adapter = adapter
 
         // Create repository
-        repository = Repository()
+        bookRepository = BookRepository()
 
         // Create presenter
         homePresenter = HomePresenter()
-        homePresenter.create(this, repository)
+        homePresenter.create(this, bookRepository)
 
-        // Get book covers to fill gallery
+        // Create Room database
+//        val bookDatabase: BookDatabase = BookDatabase.getInstance(homePresenter.getContext())
+//        bookDatabase.bookDao().insert(book)
+
+
+        // Make network request to get book covers to fill gallery
         homePresenter.getBooks()
+    }
+
+    override fun onResponse(books: List<Book>) {
+        adapter.setData(books)
+        this.books = books
+    }
+
+    override fun onFailure(msg: String) {
+        Log.d("CLICKED", "msg")
     }
 
     override fun onDestroy() {
         super.onDestroy()
         homePresenter.destroy()
-    }
-
-    override fun onGetDataSuccess(books: List<Book>) {
-        adapter.setData(books)
-        this.books = books
-    }
-
-    override fun onGetDataError(msg: String) {
-        Log.d("CLICKED", "msg")
     }
 
     override fun onBookClick(position: Int) {

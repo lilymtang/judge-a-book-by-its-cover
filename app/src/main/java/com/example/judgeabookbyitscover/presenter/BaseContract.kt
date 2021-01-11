@@ -1,6 +1,6 @@
 package com.example.judgeabookbyitscover.presenter
 
-import com.example.judgeabookbyitscover.model.Repository
+import com.example.judgeabookbyitscover.model.db.BookRepository
 
 interface BaseContract {
     interface View {
@@ -8,7 +8,7 @@ interface BaseContract {
     }
 
     interface Presenter<V: View> {
-        fun create(view: V, repository: Repository)
+        fun create(view: V, bookRepository: BookRepository)
         fun destroy()
     }
 }

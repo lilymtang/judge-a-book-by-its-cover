@@ -1,16 +1,18 @@
 package com.example.judgeabookbyitscover.model.datamodels
 
+import androidx.annotation.NonNull
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "bookshelf")
 data class Book(
-    val amazon_product_url: String,
-    val author: String,
-    val book_image: String,
-    val book_image_height: Int,
-    val book_image_width: Int,
-    val description: String,
-    val primary_isbn10: String,
-    val primary_isbn13: String,
-    val rank: Int,
-    val rank_last_week: Int,
-    val title: String,
-    val weeks_on_list: Int
+    val amazon_product_url: String = "test",
+    val author: String = "test",
+    val book_image: String = "test",
+    val description: String = "test",
+    @PrimaryKey @NonNull val primary_isbn13: String = "test",
+    val rank: Int = -1,
+    val rank_last_week: Int = -1,
+    val title: String = "test",
+    val weeks_on_list: Int = -1
 )

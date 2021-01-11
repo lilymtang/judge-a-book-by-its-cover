@@ -2,12 +2,15 @@ package com.example.judgeabookbyitscover.presenter
 
 import com.example.judgeabookbyitscover.model.datamodels.Book
 
-// HomeContract implement BaseContract members
-// Outlines responsibilities of HomeActivity (View) and HomePresenter
+/**
+ * HomeContract implement BaseContract members to outline responsibilities of HomeActivity and HomePresenter
+ */
 interface HomeContract {
     interface View : BaseContract.View {
-        fun onGetDataSuccess(books: List<Book>)
-        fun onGetDataError(msg: String)
+
+        // Callback functions that presenter will call to notify view
+        fun onResponse(books: List<Book>)
+        fun onFailure(msg: String)
     }
 
     interface Presenter : BaseContract.Presenter<View> {

@@ -46,7 +46,7 @@
         tools:text="The third book in the Jake Brigance series. A 16-year-old is accused of killing a deputy in Clanton, Miss., in 1990." />
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/options"
+        android:id="@+id/detail_menu"
         paddingBottomSystemWindowInsets="@{true}"
         paddingLeftSystemWindowInsets="@{true}"
         paddingRightSystemWindowInsets="@{true}"

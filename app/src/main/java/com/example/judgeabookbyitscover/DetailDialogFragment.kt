@@ -1,18 +1,19 @@
 package com.example.judgeabookbyitscover
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
+import android.widget.Toast
+import com.example.judgeabookbyitscover.model.datamodels.Book
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.detail.view.*
 
 
 //class DetailDialogFragment : Fragment(R.layout.detail)
 
-class DetailDialogFragment : BottomSheetDialogFragment() {
+class DetailDialogFragment : BottomSheetDialogFragment(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -24,7 +25,16 @@ class DetailDialogFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Navigation listener
+        setNavigationViewListener()
+
         setupView(view)
+    }
+
+    private fun setNavigationViewListener() {
+        val navigationView = getView()?.findViewById(R.id.detail_menu) as NavigationView
+        navigationView.setNavigationItemSelectedListener(this)
     }
 
     private fun setupView(view: View) {
@@ -40,24 +50,28 @@ class DetailDialogFragment : BottomSheetDialogFragment() {
                 WindowManager.LayoutParams.WRAP_CONTENT
         )
     }
-//
-////    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
-////            BottomSheetDialogFragment.Builder(requireContext())
-////                    .setMessage(getString(R.string.order_confirmation))
-////                    .setPositiveButton(getString(R.string.ok)) { _,_ -> }
-////                    .create()
-//
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+//            R.id.menu_favorite -> TODO
+            R.id.menu_view_on -> startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(arguments?.getString(AMAZON_URL))));
+        }
+        return true
+    }
+
     companion object {
         const val TAG = "DetailDialog"
         private const val BOOK_TITLE = "KEY_TITLE"
         private const val AUTHOR = "KEY_AUTHOR"
         private const val DESCRIPTION = "KEY_DESCRIPTION"
+        private const val AMAZON_URL = "KEY_URL"
 
-        fun newInstance(bookTitle: String, author: String, description: String): BottomSheetDialogFragment {
+        fun newInstance(book: Book): BottomSheetDialogFragment {
             val args = Bundle()
-            args.putString(BOOK_TITLE, bookTitle)
-            args.putString(AUTHOR, author)
-            args.putString(DESCRIPTION, description)
+            args.putString(BOOK_TITLE, book.title)
+            args.putString(AUTHOR, book.author)
+            args.putString(DESCRIPTION, book.description)
+            args.putString(AMAZON_URL, book.amazon_product_url)
             val fragment = DetailDialogFragment()
             fragment.arguments = args
             return fragment

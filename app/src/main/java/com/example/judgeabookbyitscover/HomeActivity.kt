@@ -2,6 +2,7 @@ package com.example.judgeabookbyitscover
 
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -51,7 +52,6 @@ class HomeActivity() : AppCompatActivity(R.layout.detail), HomeContract.View, Ho
 //        val bookDatabase: BookDatabase = BookDatabase.getInstance(homePresenter.getContext())
 //        bookDatabase.bookDao().insert(book)
 
-
         // Make network request to get book covers to fill gallery
         homePresenter.getBooks()
     }
@@ -79,9 +79,10 @@ class HomeActivity() : AppCompatActivity(R.layout.detail), HomeContract.View, Ho
 
     private fun openBottomSheetDialog(bookClicked: Book) {
         DetailDialogFragment
-                .newInstance(bookClicked.title, bookClicked.author, bookClicked.description)
+                .newInstance(bookClicked)
                 .show(supportFragmentManager, DetailDialogFragment.TAG)
     }
+
 
 
 }

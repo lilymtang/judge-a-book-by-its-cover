@@ -15,11 +15,7 @@ import kotlinx.android.synthetic.main.detail.view.*
 
 class DetailDialogFragment : BottomSheetDialogFragment(), NavigationView.OnNavigationItemSelectedListener {
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.detail, container, false)
     }
 

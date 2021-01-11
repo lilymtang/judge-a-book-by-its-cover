@@ -2,7 +2,6 @@ package com.example.judgeabookbyitscover
 
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -23,7 +22,7 @@ class HomeActivity() : AppCompatActivity(R.layout.detail), HomeContract.View, Ho
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.home_activity)
 
 //        if (savedInstanceState == null) {
 //            supportFragmentManager.commit {

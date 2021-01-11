@@ -6,26 +6,29 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
+import com.example.judgeabookbyitscover.model.datamodels.Book
 
 /**
  * Adapter creates a view holder and fills it with data for RecyclerView to display
  */
 class HomeAdapter(var glide: RequestManager, var onBookListener: OnBookListener) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
-    private var data = emptyList<String>()
+    private var books = emptyList<Book>()
+    private var bookImgs = emptyList<String>()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int ): HomeAdapter.ViewHolder {
         return ViewHolder.from(parent, onBookListener)
     }
 
     override fun getItemCount(): Int {
-        return data.size
+        return bookImgs.size
     }
 
     /**
      * Called by RecyclerView to display the data for the item at the specified list position
      */
     override fun onBindViewHolder(holder: HomeAdapter.ViewHolder, position: Int) {
-        glide.load(data[position])
+        glide.load(bookImgs[position])
             .override(128, 200)
             .into(holder.img)
     }
@@ -62,8 +65,13 @@ class HomeAdapter(var glide: RequestManager, var onBookListener: OnBookListener)
         fun onBookClick(position: Int)
     }
 
-    fun setData(newList: List<String>) {
-        data = newList
+    fun getData(): List<Book> {
+        return books
+    }
+
+    fun setData(books: List<Book>) {
+        this.books = books
+        this.bookImgs = books.map{ it.book_image }
         notifyDataSetChanged()
     }
 

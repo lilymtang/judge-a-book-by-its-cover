@@ -1,6 +1,7 @@
 package com.example.judgeabookbyitscover.model
 
 import android.util.Log
+import com.example.judgeabookbyitscover.model.datamodels.Book
 import com.example.judgeabookbyitscover.model.datamodels.ListsOverview
 import retrofit2.Call
 import retrofit2.Callback
@@ -13,12 +14,12 @@ class Repository {
     var service = BooksApi.BooksApiService
 
     interface OnFinishedListener {
-        fun onSuccess(data: List<String>)
+        fun onSuccess(data: List<Book>)
         fun onFail(msg: String)
     }
 
     fun getBookImgs(onFinishedListener: OnFinishedListener) {
-        //lateinit var books : List<Book>
+        lateinit var books : List<Book>
 
         service.getListsOverview().enqueue(object : Callback<ListsOverview> {
 
@@ -36,13 +37,11 @@ class Repository {
 
                 var lists = response.body()?.results?.lists
                 if (lists != null) {
-                    // books = lists.flatMap { it.books }
-                    var bookImgs: List<String> = lists.flatMap { it.books }.map { it.book_image }.distinct()
 
-                    Log.d("RESPONSE_", bookImgs.toString())
-                    Log.d("RESPONSE_", bookImgs.size.toString())
+                    // Distinct Book objects
+                    books = lists.flatMap { it.books }.map { it }.distinctBy{ it -> it.book_image }
 
-                    onFinishedListener.onSuccess(bookImgs)
+                    onFinishedListener.onSuccess(books)
                 }
             }
         })

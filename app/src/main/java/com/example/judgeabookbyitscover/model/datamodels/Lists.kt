@@ -1,6 +1,4 @@
-package com.example.judgeabookbyitscover.network
-
-import com.example.judgeabookbyitscover.network.Book
+package com.example.judgeabookbyitscover.model.datamodels
 
 data class Lists(
     val books: List<Book>,

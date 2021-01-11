@@ -1,6 +1,4 @@
-package com.example.judgeabookbyitscover.network
-
-import com.example.judgeabookbyitscover.network.Lists
+package com.example.judgeabookbyitscover.model.datamodels
 
 data class Results(
     val bestsellers_date: String,

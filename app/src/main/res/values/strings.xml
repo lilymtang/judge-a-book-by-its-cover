@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Judge A Book By Its Cover</string>
+    <string name="favorite">Add to my bookshelf</string>
+    <string name="view_on">View on Amazon</string>
 </resources>

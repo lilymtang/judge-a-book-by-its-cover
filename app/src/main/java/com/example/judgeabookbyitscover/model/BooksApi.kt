@@ -1,4 +1,4 @@
-package com.example.judgeabookbyitscover.network
+package com.example.judgeabookbyitscover.model
 
 import com.example.judgeabookbyitscover.BuildConfig
 import okhttp3.OkHttpClient
@@ -6,8 +6,8 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-private const val BASE_URL = "https://www.googleapis.com"
-private const val API_KEY = BuildConfig.GOOGLE_API_KEY
+private const val BASE_URL = "https://api.nytimes.com"
+private const val API_KEY = BuildConfig.NYT_API_KEY
 
 /**
  * Use the Retrofit builder to build a retrofit object using Moshi as a JSON converter with the base URL set here.
@@ -22,7 +22,7 @@ private val retrofit = Retrofit.Builder()
                     .request()
                     .url()
                     .newBuilder()
-                    .addQueryParameter("key", API_KEY)
+                    .addQueryParameter("api-key", API_KEY)
                     .build()
                 chain.proceed(chain.request().newBuilder().url(url).build())
             }
@@ -33,6 +33,6 @@ private val retrofit = Retrofit.Builder()
 /**
  * A public Api object that exposes the lazy-initialized Retrofit service.
  */
-object VolumeApi {
-    val volumeApiService : GoogleBookApi by lazy {retrofit.create(GoogleBookApi::class.java)}
+object BooksApi {
+    val BooksApiService : NytApi by lazy {retrofit.create(NytApi::class.java)}
 }

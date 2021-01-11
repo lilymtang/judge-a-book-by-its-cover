@@ -1,4 +1,4 @@
-package com.example.judgeabookbyitscover.network
+package com.example.judgeabookbyitscover.model.datamodels
 
 data class VolumeInfo(
     val authors: List<String>,

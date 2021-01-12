@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_favorite"
-        android:icon="@drawable/ic_baseline_add_24"
-        android:title="@string/favorite"
+        android:id="@+id/shelf_menu_remove"
+        android:icon="@drawable/ic_baseline_remove_24"
+        android:title="@string/unfavorite"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/menu_view_on"
+        android:id="@+id/shelf_menu_view_on"
         android:icon="@drawable/ic_baseline_launch_24"
         android:title="@string/view_on"
         app:showAsAction="always" />

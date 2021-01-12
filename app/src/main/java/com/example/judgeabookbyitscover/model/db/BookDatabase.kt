@@ -7,7 +7,7 @@ import com.example.judgeabookbyitscover.model.datamodels.Book
 /**
  * This abstract class acts as a database holder and returns one instance of a BookDatabase
  */
-@Database(entities = [(Book::class)], version = 1)
+@Database(entities = [(Book::class)], version = 2)
 //@TypeConverters(BookAttributesConverter::class)
 abstract class BookDatabase : RoomDatabase() {
     abstract val bookDao: BookDao

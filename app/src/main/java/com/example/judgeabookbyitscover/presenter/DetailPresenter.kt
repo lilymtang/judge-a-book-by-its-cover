@@ -10,17 +10,23 @@ import kotlinx.coroutines.launch
 // extend BasePresenter and implement HomeContract.Presenter
 class DetailPresenter: BasePresenter<DetailContract.View>(), DetailContract.Presenter {
 
-//    private var job: Job = Job()
-//    private val scope = CoroutineScope(job + Dispatchers.Main)
-//
-//    fun detachView() {
-//        // cancel the job when view is detached
-//        job.cancel()
-//    }
+    private var job: Job = Job()
+    private val scope = CoroutineScope(job + Dispatchers.Main)
+
+    fun detachView() {
+        // cancel the job when view is detached
+        job.cancel()
+    }
 
     override fun addToShelf(book: Book) {
-//        scope.launch{
-//            repository!!.addBookToShelf(book)
-//        }
+        scope.launch{
+            repository!!.addBookToShelf(book)
+        }
+    }
+
+    override fun removeFromShelf(book: Book) {
+        scope.launch{
+            repository!!.removeBookFromShelf(book)
+        }
     }
 }

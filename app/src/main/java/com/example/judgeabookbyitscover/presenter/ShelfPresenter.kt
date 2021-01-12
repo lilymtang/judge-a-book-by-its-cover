@@ -12,18 +12,18 @@ import kotlin.coroutines.CoroutineContext
 
 // extend BasePresenter and implement ShelfContract.Presenter
 class ShelfPresenter : BasePresenter<ShelfContract.View>(), ShelfContract.Presenter {
-//    private var job: Job = Job()
-//    private val scope = CoroutineScope(job + Dispatchers.Main)
-//
-//    fun detachView() {
-//        // cancel the job when view is detached
-//        job.cancel()
-//    }
+    private var job: Job = Job()
+    private val scope = CoroutineScope(job + Dispatchers.Main)
+
+    fun detachView() {
+        // cancel the job when view is detached
+        job.cancel()
+    }
 
     override fun getShelfBooks() {
-//        scope.launch {
-//            val shelfBooks = repository!!.getBooksFromShelf()
-//            view!!.onResponse(shelfBooks)
-//        }
+        scope.launch {
+            val shelfBooks = repository!!.getBooksFromShelf()
+            view!!.onResponse(shelfBooks)
+        }
     }
 }

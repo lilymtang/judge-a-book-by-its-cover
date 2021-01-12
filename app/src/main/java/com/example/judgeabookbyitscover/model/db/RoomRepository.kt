@@ -5,11 +5,23 @@ import com.example.judgeabookbyitscover.model.datamodels.Book
 
 
 interface RoomRepository {
-    fun addBookToShelf(book: Book)
-    fun removeBookFromShelf(isbn: String)
-    fun getBooksFromShelf(): LiveData<List<Book>>
+    suspend fun addBookToShelf(book: Book)
+    suspend fun removeBookFromShelf(book: Book)
+    suspend fun getBooksFromShelf(): List<Book>
 }
-//
-//class Repository() : RoomRepository {
-//
-//}
+
+class Repository(var db: BookDatabase) : RoomRepository {
+
+    override suspend fun addBookToShelf(book: Book) {
+        db.bookDao.insert(book)
+    }
+
+    override suspend fun removeBookFromShelf(book: Book) {
+        db.bookDao.delete(book)
+    }
+
+    override suspend fun getBooksFromShelf():List<Book> {
+        return db.bookDao.getBooks()
+    }
+
+}

@@ -1,46 +1,44 @@
 package com.example.judgeabookbyitscover
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.judgeabookbyitscover.model.datamodels.Book
+import com.example.judgeabookbyitscover.model.db.BookDatabase
 import com.example.judgeabookbyitscover.model.db.BookRepository
-import com.example.judgeabookbyitscover.presenter.HomeContract
-import com.example.judgeabookbyitscover.presenter.HomePresenter
+import com.example.judgeabookbyitscover.model.db.Repository
+import com.example.judgeabookbyitscover.presenter.ShelfContract
+import com.example.judgeabookbyitscover.presenter.ShelfPresenter
 
-class ShelfFragment : Fragment(), HomeContract.View, HomeAdapter.OnBookListener {
+class ShelfFragment : Fragment(), ShelfContract.View, HomeAdapter.OnBookListener, DialogCallBack {
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: HomeAdapter
 
-    lateinit var homePresenter: HomePresenter
+    lateinit var shelfPresenter: ShelfPresenter
     lateinit var bookRepository: BookRepository
 
     lateinit var books: List<Book>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.home_activity, container, false)
+        return inflater.inflate(R.layout.tab_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // Configure recycler view
         recyclerView = view.findViewById(R.id.cover_gallery)
         recyclerView.addItemDecoration(MarginItemDecoration(8))
-        recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        recyclerView.layoutManager = GridLayoutManager(activity, 2)
 
         // Configure adapter
         adapter = HomeAdapter(Glide.with(this), this)
         recyclerView.adapter = adapter
-
-        // Configure recycler view
-        recyclerView = view.findViewById(R.id.cover_gallery)
-        recyclerView.addItemDecoration(MarginItemDecoration(8))
-        recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
         adapter = HomeAdapter(Glide.with(this), this)
         recyclerView.adapter = adapter
@@ -49,15 +47,18 @@ class ShelfFragment : Fragment(), HomeContract.View, HomeAdapter.OnBookListener 
         bookRepository = BookRepository()
 
         // Create presenter
-        homePresenter = HomePresenter()
-        homePresenter.create(this, bookRepository)
-
-        // Create Room database
-        // val bookDatabase: BookDatabase = BookDatabase.getInstance(homePresenter.getContext())
-        // bookDatabase.bookDao().insert(book)
+        shelfPresenter = ShelfPresenter()
+        shelfPresenter.create(this, bookRepository, Repository(BookDatabase.getInstance(activity!!.applicationContext)))
 
         // Make network request to get book covers to fill gallery
-        homePresenter.getBooks()
+        shelfPresenter.getShelfBooks()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // Make network request to get book covers to fill gallery
+        shelfPresenter.getShelfBooks()
     }
 
     override fun onResponse(books: List<Book>) {
@@ -71,7 +72,8 @@ class ShelfFragment : Fragment(), HomeContract.View, HomeAdapter.OnBookListener 
 
     override fun onDestroy() {
         super.onDestroy()
-        homePresenter.destroy()
+        shelfPresenter.destroy()
+        shelfPresenter.detachView()
     }
 
     override fun onBookClick(position: Int) {
@@ -79,9 +81,23 @@ class ShelfFragment : Fragment(), HomeContract.View, HomeAdapter.OnBookListener 
         openBottomSheetDialog(books[position])
     }
 
-    private fun openBottomSheetDialog(bookClicked: Book) {
-        DetailDialogFragment
-                .newInstance(bookClicked)
-                .show(activity!!.supportFragmentManager, DetailDialogFragment.TAG)
+    override fun onDialogClick() {
+        // Make network request to get book covers to fill gallery
+        shelfPresenter.getShelfBooks()
     }
+
+    private fun openBottomSheetDialog(bookClicked: Book) {
+        val dialog = DetailDialogFragment.newInstance(bookClicked, "shelf")
+        dialog.setTargetFragment(this, DETAIL_DIALOG)
+        dialog.show(activity!!.supportFragmentManager, DetailDialogFragment.TAG)
+    }
+
+    companion object {
+        const val DETAIL_DIALOG = 1
+    }
+
+}
+
+interface DialogCallBack {
+    fun onDialogClick()
 }

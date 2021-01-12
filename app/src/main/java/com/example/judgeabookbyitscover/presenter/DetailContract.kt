@@ -15,5 +15,6 @@ interface DetailContract {
 
     interface Presenter : BaseContract.Presenter<View> {
         fun addToShelf(book: Book)
+        fun removeFromShelf(book: Book)
     }
 }

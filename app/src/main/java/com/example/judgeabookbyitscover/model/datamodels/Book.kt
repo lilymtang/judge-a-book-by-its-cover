@@ -8,9 +8,9 @@ import androidx.room.PrimaryKey
 data class Book(
     val amazon_product_url: String = "test",
     val author: String = "test",
-    val book_image: String = "test",
+    @PrimaryKey @NonNull val book_image: String = "test",
     val description: String = "test",
-    @PrimaryKey @NonNull val primary_isbn13: String = "test",
+    val primary_isbn13: String = "test",
     val rank: Int = -1,
     val rank_last_week: Int = -1,
     val title: String = "test",

@@ -6,11 +6,14 @@ import com.example.judgeabookbyitscover.model.datamodels.Book
 @Dao
 interface BookDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(book: Book)
+    suspend fun insert(book: Book)
 
     @Delete
-    fun delete(vararg book: Book)
+    suspend fun delete(vararg book: Book)
 
     @Query("SELECT * FROM bookshelf")
-    fun getBooks(): List<Book>
+    suspend fun getBooks(): List<Book>
+
+    @Query("SELECT * FROM bookshelf where book_image = :img")
+    suspend fun deleteBookByImage(img: String): List<Book>
 }

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Judge A Book By Its Cover</string>
-    <string name="favorite">Add to my bookshelf</string>
+    <string name="favorite">Add to my shelf</string>
+    <string name="unfavorite">Remove from my shelf</string>
     <string name="view_on">View on Amazon</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="tab_text_1">Library</string>

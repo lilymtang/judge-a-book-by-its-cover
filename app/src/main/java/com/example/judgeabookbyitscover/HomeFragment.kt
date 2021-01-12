@@ -1,5 +1,6 @@
 package com.example.judgeabookbyitscover
 
+import MarginItemDecoration
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -33,7 +34,7 @@ class HomeFragment : Fragment(), HomeContract.View, HomeAdapter.OnBookListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // Configure recycler view
         recyclerView = view.findViewById(R.id.cover_gallery)
-        recyclerView.addItemDecoration(MarginItemDecoration(8))
+        recyclerView.addItemDecoration(MarginItemDecoration(2, 10, includeEdge = true))
         recyclerView.layoutManager = GridLayoutManager(activity, 2)
 
         // Configure adapter

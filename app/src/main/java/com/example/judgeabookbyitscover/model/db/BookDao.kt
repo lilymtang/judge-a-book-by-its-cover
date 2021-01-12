@@ -5,7 +5,7 @@ import com.example.judgeabookbyitscover.model.datamodels.Book
 
 @Dao
 interface BookDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(book: Book)
 
     @Delete

@@ -49,7 +49,7 @@ class DetailDialogFragment : BottomSheetDialogFragment(), NavigationView.OnNavig
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-//            R.id.menu_favorite -> TODO
+            R.id.menu_favorite -> Toast.makeText(view?.context, "Add to shelf", Toast.LENGTH_LONG).show()
             R.id.menu_view_on -> startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(arguments?.getString(AMAZON_URL))));
         }
         return true

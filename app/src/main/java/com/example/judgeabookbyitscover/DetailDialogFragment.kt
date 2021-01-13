@@ -110,15 +110,6 @@ class DetailDialogFragment : DetailContract.View, BottomSheetDialogFragment(), N
         }
     }
 
-    // Callbacks for presenter to update view
-    override fun onResponse(books: List<Book>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onFailure(msg: String) {
-        TODO("Not yet implemented")
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         detailPresenter.destroy()

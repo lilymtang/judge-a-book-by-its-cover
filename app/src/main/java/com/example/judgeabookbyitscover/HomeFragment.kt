@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.judgeabookbyitscover.model.datamodels.Book
 import com.example.judgeabookbyitscover.model.db.BookDatabase
@@ -73,7 +72,7 @@ class HomeFragment : Fragment(), HomeContract.View, HomeAdapter.OnBookListener {
 
     // Callbacks for presenter to update view
     override fun onResponse(books: List<Book>) {
-        adapter.setData(books)
+        adapter.setBooks(books)
         this.books = books
     }
 

@@ -2,7 +2,6 @@ package com.example.judgeabookbyitscover
 
 import MarginItemDecoration
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -63,7 +62,7 @@ class ShelfFragment : Fragment(), ShelfContract.View, HomeAdapter.OnBookListener
     }
 
     override fun onResponse(books: List<Book>) {
-        adapter.setData(books)
+        adapter.setBooks(books)
         this.books = books
     }
 

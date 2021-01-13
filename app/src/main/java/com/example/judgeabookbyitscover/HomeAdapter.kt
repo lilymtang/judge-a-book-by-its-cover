@@ -65,11 +65,11 @@ class HomeAdapter(var glide: RequestManager, var onBookListener: OnBookListener)
         fun onBookClick(position: Int)
     }
 
-    fun getData(): List<Book> {
+    fun getBooks(): List<Book> {
         return books
     }
 
-    fun setData(books: List<Book>) {
+    fun setBooks(books: List<Book>) {
         this.books = books
         this.bookImgs = books.map{ it.book_image }
         notifyDataSetChanged()

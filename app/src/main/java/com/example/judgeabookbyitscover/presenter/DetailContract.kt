@@ -8,9 +8,6 @@ import com.example.judgeabookbyitscover.model.datamodels.Book
 interface DetailContract {
     interface View : BaseContract.View {
 
-        // Callback functions that presenter will call to notify view
-        fun onResponse(books: List<Book>)
-        fun onFailure(msg: String)
     }
 
     interface Presenter : BaseContract.Presenter<View> {

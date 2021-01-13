@@ -11,8 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".SettingsActivity"
-            android:parentActivityName=".MainActivity"></activity>
+        <service
+            android:name=".ExportService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity
+            android:name=".SettingsActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"

@@ -6,4 +6,8 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="tab_text_1">Library</string>
     <string name="tab_text_2">My Shelf</string>
+    <string name="channel_name">New Books</string>
+    <string name="channel_description">New lists published each week</string>
+    <string name="notification_title">New books have arrived!</string>
+    <string name="notification_text">Check out this week\'s New York Times’s best-sellers</string>
 </resources>

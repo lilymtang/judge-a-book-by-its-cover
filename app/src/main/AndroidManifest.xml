@@ -26,10 +26,15 @@
         <receiver
             android:name=".MyAlarmReceiver"
             android:process=":remote" >
+            <intent-filter>
+                <action android:name="REFRESH_THIS" />
+            </intent-filter>
         </receiver>
 
         <service
             android:name=".NotificationService"
+            android:enabled="true"
+            android:label="Notification"
             android:exported="false" >
         </service>
 

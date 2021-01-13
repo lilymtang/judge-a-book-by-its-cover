@@ -2,6 +2,9 @@
 
 We've always been told to not judge a book by its cover, so I decided to make an app that encourages doing the complete opposite. Looking at book covers is kind of reminiscent of the days of browsing an actual library. The cover is the first thing you see when you pull a book from the shelf and can range from artistic to minimalist to thought-provoking. This app allows you to browse the most recent New York Times Best Seller lists via a gallery of book covers. 
 
+<img src="home.png" height="600" >
+
+
 ## Requirements
 
 ### Activities
@@ -11,7 +14,9 @@ We've always been told to not judge a book by its cover, so I decided to make an
   - The tab layout has 2 tabs: one is the Library, where the user can browse all the best sellers; the second is My Shelf, where users can see their saved books. Users can either click or swipe between the tabs. 
   - The top app bar collapses when scrolling while the tabs remain in view for clear user navigation. 
 - Settings activity
-  - This activity is accessed from the 3-dot overflow menu on the Main Activity. The only functionality of this page currently is to export a user's shelf. 
+  - This activity is accessed from the 3-dot overflow menu on the Main Activity. The only functionality of this page currently is to export a user's shelf.
+ 
+<img src="settings.png" height="600" >
 
 ### Fragments
 
@@ -21,6 +26,8 @@ We've always been told to not judge a book by its cover, so I decided to make an
   - This fragment is a BottomSheetDialog that displays information about each book and 2 actions: adding/removing books to My Shelf, and viewing the book's Amazon listing. 
   - It is used to display details for books in both the Library and My Shelf tabs. 
   - Both Add and Remove actions are immediately reflected in My Shelf.
+  
+<img src="add.png" height="600" >
 
 ### Service
 

@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.judgeabookbyitscover.model.datamodels.Book
 import com.example.judgeabookbyitscover.model.db.BookDatabase
-import com.example.judgeabookbyitscover.model.db.BookRepository
 import com.example.judgeabookbyitscover.model.db.Repository
 import com.example.judgeabookbyitscover.presenter.HomeContract
 import com.example.judgeabookbyitscover.presenter.HomePresenter
@@ -22,7 +21,6 @@ class HomeFragment : Fragment(), HomeContract.View, HomeAdapter.OnBookListener {
     lateinit var adapter: HomeAdapter
 
     lateinit var homePresenter: HomePresenter
-    lateinit var bookRepository: BookRepository
 
     lateinit var books: List<Book>
 
@@ -43,12 +41,9 @@ class HomeFragment : Fragment(), HomeContract.View, HomeAdapter.OnBookListener {
         adapter = HomeAdapter(Glide.with(this), this)
         recyclerView.adapter = adapter
 
-        // Create repository
-        bookRepository = BookRepository()
-
         // Create presenter
         homePresenter = HomePresenter()
-        homePresenter.create(this, bookRepository, Repository(BookDatabase.getInstance(activity!!.applicationContext)))
+        homePresenter.create(this, Repository(BookDatabase.getInstance(activity!!.applicationContext)))
 
         // Make network request to get book covers to fill gallery
         homePresenter.getBooks()

@@ -1,14 +1,9 @@
 package com.example.judgeabookbyitscover.presenter
 
-import android.widget.Toast
-import com.example.judgeabookbyitscover.model.db.BookRepository
-import com.example.judgeabookbyitscover.model.datamodels.Book
-import com.example.judgeabookbyitscover.model.db.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
 // extend BasePresenter and implement ShelfContract.Presenter
 class ShelfPresenter : BasePresenter<ShelfContract.View>(), ShelfContract.Presenter {

@@ -4,15 +4,12 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
-import android.widget.Toast
 import com.example.judgeabookbyitscover.model.datamodels.Book
 import com.example.judgeabookbyitscover.model.db.BookDatabase
-import com.example.judgeabookbyitscover.model.db.BookRepository
 import com.example.judgeabookbyitscover.model.db.Repository
 import com.example.judgeabookbyitscover.presenter.ShelfContract
 import com.example.judgeabookbyitscover.presenter.ShelfPresenter
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
-import com.google.android.material.snackbar.Snackbar
 import java.io.File
 
 class ExportService : Service(), ShelfContract.View {
@@ -23,7 +20,7 @@ class ExportService : Service(), ShelfContract.View {
 
         // Create presenter
         var shelfPresenter = ShelfPresenter()
-        shelfPresenter.create(this, BookRepository(), Repository(BookDatabase.getInstance(applicationContext)))
+        shelfPresenter.create(this, Repository(BookDatabase.getInstance(applicationContext)))
 
         // Make network request to get book covers to fill gallery
         shelfPresenter.getShelfBooks()

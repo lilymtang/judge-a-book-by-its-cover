@@ -1,6 +1,5 @@
 package com.example.judgeabookbyitscover.presenter
 
-import com.example.judgeabookbyitscover.model.db.BookRepository
 import com.example.judgeabookbyitscover.model.datamodels.Book
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

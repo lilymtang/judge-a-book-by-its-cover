@@ -5,18 +5,14 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import com.example.judgeabookbyitscover.model.datamodels.Book
 import com.example.judgeabookbyitscover.model.db.BookDatabase
-import com.example.judgeabookbyitscover.model.db.BookRepository
 import com.example.judgeabookbyitscover.model.db.Repository
-import com.example.judgeabookbyitscover.presenter.BaseContract
 import com.example.judgeabookbyitscover.presenter.DetailContract
 import com.example.judgeabookbyitscover.presenter.DetailPresenter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.detail.*
 import kotlinx.android.synthetic.main.detail.view.*
 
 class DetailDialogFragment : DetailContract.View, BottomSheetDialogFragment(), NavigationView.OnNavigationItemSelectedListener {
@@ -35,7 +31,7 @@ class DetailDialogFragment : DetailContract.View, BottomSheetDialogFragment(), N
 
         // Create presenter
         detailPresenter = DetailPresenter()
-        detailPresenter.create(this, BookRepository(), Repository(BookDatabase.getInstance(activity!!.applicationContext)))
+        detailPresenter.create(this, Repository(BookDatabase.getInstance(activity!!.applicationContext)))
 
         setupView(view)
     }

@@ -11,12 +11,14 @@ We've always been told to not judge a book by its cover, so I decided to make an
 
 - Main activity
   - This activity is the entry point of the app. It displays a scrolling gallery of covers of this week's bestsellers using a recycler view and grid layout. 
-  - The tab layout has 2 tabs: one is the Library, where the user can browse all the best sellers; the second is My Shelf, where users can see their saved books. Users can either click or swipe between the tabs. 
+<img src="scrolling-toolbar.gif" height="600" >
+
+  - The tab layout has 2 tabs: one is the Library, where the user can browse all the best sellers; the second is My Shelf, where users can see their saved books (a new user's Shelf is empty). Users can either click or swipe between the tabs. 
+<img src="new-user-tabs.gif" height="600" >
+
   - The top app bar collapses when scrolling while the tabs remain in view for clear user navigation. 
 - Settings activity
   - This activity is accessed from the 3-dot overflow menu on the Main Activity. The only functionality of this page currently is to export a user's shelf.
- 
-<img src="settings.png" height="600" >
 
 ### Fragments
 
@@ -27,12 +29,15 @@ We've always been told to not judge a book by its cover, so I decided to make an
   - It is used to display details for books in both the Library and My Shelf tabs. 
   - Both Add and Remove actions are immediately reflected in My Shelf.
   
-<img src="add.png" height="600" >
+<img src="add-book-to-shelf.gif" height="600" >
+
 
 ### Service
 
 - Export service
   - Within Settings, the Export button launches a service that queries the Room repository and exports to CSV all the books in My Shelf. This operation does not take long, but running it in as a service ensures that the export will complete even if the user leaves the app. 
+ 
+<img src="settings.png" height="600" >
 
 ### MVP
 

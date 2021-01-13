@@ -13,7 +13,4 @@ interface BookDao {
 
     @Query("SELECT * FROM bookshelf")
     suspend fun getBooks(): List<Book>
-
-    @Query("SELECT * FROM bookshelf where book_image = :img")
-    suspend fun deleteBookByImage(img: String): List<Book>
 }

@@ -6,4 +6,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="tab_text_1">Library</string>
     <string name="tab_text_2">My Shelf</string>
+    <string name="settings">Settings</string>
+    <string name="settings_export_subtitle">Books on your shelf will be saved as a text file to your device</string>
+    <string name="settings_export_title">Export Books</string>
 </resources>

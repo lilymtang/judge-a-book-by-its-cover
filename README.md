@@ -11,6 +11,7 @@ We've always been told to not judge a book by its cover, so I decided to make an
 - Main activity
   - This activity is the entry point of the app. It displays a scrolling gallery of covers of this week's best sellers using a recycler view and grid layout. The top app bar collapses when scrolling down while the tabs remain in view for clear user navigation. 
   - The tab layout has 2 tabs: one is the Library, where the user can browse all the best sellers; the second is My Shelf, where users can see their saved books (a new user's shelf is empty). Users can either click or swipe between the tabs. 
+  
 <img src="scrolling-toolbar.gif" height="600" > <img src="new-user-tabs.gif" height="600" >
 
 - Settings activity

@@ -1,6 +1,6 @@
 # Judge a Book by its Cover 
 
-We've always been told to not judge a book by its cover, so I decided to make an app that encourages doing the complete opposite. Looking at book covers is kind of reminiscent of the days of browsing an actual library. The cover is the first thing you see when you pull a book from the shelf and can range from artistic to minimalist to thought-provoking. This app allows you to browse the most recent New York Times Best Seller lists via a gallery of book covers. 
+We've always been told to not judge a book by its cover, so I decided to make an app that encourages doing the complete opposite. Looking at book covers is reminiscent of the days of browsing an actual library. The cover is the first thing you see when you pull a book from the shelf and can range from artistic to minimalist to thought-provoking. This app features the book covers of the most recent New York Times Best Seller lists and allows you to save your favorites to your bookshelf. So judge away, and pick your next read!
 
 <img src="home.png" height="600" > <img src="add.png" height="600" >
 
@@ -64,3 +64,11 @@ We've always been told to not judge a book by its cover, so I decided to make an
 
 - Room is used to persist the books that a user has saved to their shelf. 
 - Calls to Room are made from nonblocking coroutines.
+
+### Future Work
+
+- Incorporate data from Google Books API to build a search by keyword and search by genre feature
+- Dark mode browsing
+- See best seller lists by list name
+- View best seller lists by date (see previous weeks best sellers and not just current week's)
+- Leverage Dagger2 for dependency injection

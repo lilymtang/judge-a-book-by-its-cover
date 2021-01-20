@@ -1,4 +1,4 @@
-# Judge a Book by its Cover 
+# Judge a Book By Its Cover 
 
 We've always been told to not judge a book by its cover, so I decided to make an app that encourages doing the complete opposite. Looking at book covers is reminiscent of the days of browsing an actual library. The cover is the first thing you see when you pull a book from the shelf and can range from artistic to minimalist to thought-provoking. This app features the book covers of the most recent New York Times Best Seller lists and allows you to save your favorites to your bookshelf. So judge away, and pick your next read!
 
